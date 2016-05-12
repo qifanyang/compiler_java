@@ -26,7 +26,7 @@ import java.util.List;
 public class NFAState{
 
     private List<NFAEdge> outEdges;
-    private int index;
+    private int index;//在NFAModel state list中的索引位置
     private int tokenIndex;
 
     public NFAState(){
@@ -35,11 +35,11 @@ public class NFAState{
     }
 
     //添加一个epsilon 符号的边并指向到下一状态
-    public void addEmptyEdgeTo(NFAState targetState){
+    public void AddEmptyEdgeTo(NFAState targetState){
         outEdges.add(new NFAEdge(targetState));
     }
 
-    public void addEdge(NFAEdge edge){
+    public void AddEdge(NFAEdge edge){
         outEdges.add(edge);
     }
 

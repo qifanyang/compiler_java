@@ -21,13 +21,15 @@ public class NFAConverter extends RegularExpressionConverter<NFAModel>{
         NFAState head = new NFAState();//图形最左边的状态
         NFAState tail = new NFAState();
 
-        //nfa1的输入边是head的输出边
-        head.addEdge(nfa1.EntryEdge);// nfa1的输入边
-        head.addEdge(nfa2.EntryEdge);
+        //nfa1的输入边是head的输出边,通过list连接起来
+        head.AddEdge(nfa1.EntryEdge);//省略了epsilon边
+        head.AddEdge(nfa2.EntryEdge);
 
-        nfa1.TailState.addEmptyEdgeTo(tail);//a和b添加epsilon边到终止状态
-        nfa2.TailState.addEmptyEdgeTo(tail);
+        //nfa1指向到tail
+        nfa1.TailState.AddEmptyEdgeTo(tail);//a和b添加epsilon边到终止状态
+        nfa2.TailState.AddEmptyEdgeTo(tail);
 
+        //a|b的数据模型
         NFAModel alternationNfa = new NFAModel();
 
         alternationNfa.AddState(head);
@@ -74,11 +76,25 @@ public class NFAConverter extends RegularExpressionConverter<NFAModel>{
 
     @Override
     public NFAModel convertConcatenation(ConcatenationExpression exp){
-        return null;
+        NFAModel leftNFA = convert(exp.Left);
+        NFAModel rightNFA = convert(exp.Right);
+
+        //connect left with right, left的尾巴和right输入边连接
+        leftNFA.TailState.AddEdge(rightNFA.EntryEdge);
+
+        NFAModel concatenationNfa = new NFAModel();
+
+        concatenationNfa.AddStates(leftNFA.getStates());
+        concatenationNfa.AddStates(rightNFA.getStates());
+        concatenationNfa.EntryEdge = leftNFA.EntryEdge;
+        concatenationNfa.TailState = rightNFA.TailState;
+
+        return concatenationNfa;
     }
 
     @Override
     public NFAModel convertAlternationCharSet(AlternationCharSetExpression exp){
+
         return null;
     }
 
@@ -94,7 +110,7 @@ public class NFAConverter extends RegularExpressionConverter<NFAModel>{
             NFAEdge  symbolEdge = new NFAEdge(c, symbolState);
 
             if (lastState != null){
-                lastState.addEdge(symbolEdge);
+                lastState.AddEdge(symbolEdge);
             }else{
                 literalNfa.EntryEdge = symbolEdge;
             }
@@ -106,6 +122,21 @@ public class NFAConverter extends RegularExpressionConverter<NFAModel>{
 
     @Override
     public NFAModel convertKleeneStar(KleeneStarExpression exp){
-        return null;
+        NFAModel innerNFA = convert(exp.InnerExpression);
+
+        NFAState tail = new NFAState();
+        NFAEdge entryEdge = new NFAEdge(tail);//epsilon 到终止状态的边
+
+        innerNFA.TailState.AddEmptyEdgeTo(tail);
+        tail.AddEdge(innerNFA.EntryEdge);
+
+        NFAModel kleenStarNFA = new NFAModel();
+
+        kleenStarNFA.AddStates(innerNFA.getStates());
+        kleenStarNFA.AddState(tail);
+        kleenStarNFA.EntryEdge = entryEdge;
+        kleenStarNFA.TailState = tail;
+
+        return kleenStarNFA;
     }
 }

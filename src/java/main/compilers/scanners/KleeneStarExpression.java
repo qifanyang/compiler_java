@@ -6,8 +6,10 @@ package compilers.scanners;
  */
 public class KleeneStarExpression extends RegularExpression{
 
-    public KleeneStarExpression(){
+    public RegularExpression InnerExpression;//对一个表达式做克林运算
+    public KleeneStarExpression(RegularExpression expr){
         super(RegularExpressionType.Alternation.KleeneStar);
+        this.InnerExpression = expr;
     }
 
     @Override

@@ -12,5 +12,5 @@ public abstract class RegularExpression{
         this.expressionType = expressionType;
     }
 
-    public abstract <T> T Accept(RegularExpressionConverter<T> tRegularExpressionConverter);
+    public abstract <T> T Accept(RegularExpressionConverter<T> convert);
 }
