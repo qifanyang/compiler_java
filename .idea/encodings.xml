@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/AlternationCharSetExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/AlternationExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/ConcatenationExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/EmptyExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/KleeneStarExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/RegularExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/RegularExpressionConverter.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/RegularExpressionType.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/StringLiteralExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/SymbolExpression.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/generator/DFAEdge.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/generator/DFAState.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/generator/NFAEdge.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/java/main/compilers/scanners/generator/NFAState.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
