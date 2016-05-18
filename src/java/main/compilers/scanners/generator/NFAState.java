@@ -27,7 +27,7 @@ public class NFAState{
 
     private List<NFAEdge> outEdges;
     private int index;//在NFAModel state list中的索引位置
-    private int tokenIndex;
+    public int tokenIndex;
 
     public NFAState(){
         outEdges = new ArrayList<>();

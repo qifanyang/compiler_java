@@ -12,14 +12,18 @@ import java.util.Set;
  * @version 1.0 2016/5/6
  */
 public class DFAState{
-    private List<DFAState> outEdges = new ArrayList<>();//状态的转换边
+    private List<DFAEdge> outEdges = new ArrayList<>();//状态的转换边
     private Set<Integer> nfaStateSet = new HashSet<>();//NFA的状态集
 
-    public List<DFAState> getOutEdges(){
+    public void AddEdge(DFAEdge edge){
+        this.outEdges.add(edge);
+    }
+
+    public List<DFAEdge> getOutEdges(){
         return outEdges;
     }
 
-    public void setOutEdges(List<DFAState> outEdges){
+    public void setOutEdges(List<DFAEdge> outEdges){
         this.outEdges = outEdges;
     }
 
