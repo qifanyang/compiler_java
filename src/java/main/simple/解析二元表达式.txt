@@ -1,0 +1,33 @@
+采用基于运算符优先级算法解析二元表达式
+
+
+1.定义一张运算符优先级列表,返回当前token(运算符)的优先级
+2.如果当前token不是二元运算符,返回-1, -1有特定用途用于结束当前解析
+
+运算符优先级解析基本思想就是拆解含有二元运算符的表达式,然后即根据二元操作符优先级
+构造二元表达式,优先级高的先结合成一个二元AST,生成代码时优先运算
+
+e.g. a+b+(c+d)*e*f+g
+1.拆解: a, [+,b],[+,(c+d)],[*,e],[*,f],[+,g], 主表达式+有序对(操作符,主表达式)
+
+
+二元表达式可以看做 primary binaryOperation
+
+表达式 x+y*z
+
+需要告诉计算机先计算y*z, 算法:运算符优先级解析
+
+定义一张优先级列表,如下:
+// Install standard binary operators.
+  // 1 is lowest precedence.
+  BinopPrecedence['<'] = 10;
+  BinopPrecedence['+'] = 20;
+  BinopPrecedence['-'] = 20;
+  BinopPrecedence['*'] = 40;  // highest.
+
+
+解析二元表达式过程:
+
+e.g. a+b+c
+解析完b后,读取b后面的+, 因为b后的二元操作符优先级不高于b前面的操作符优先级
+所以可以先计算a+b, 所以a+b构成一个二元表达式,也作为右边表达式的primary
