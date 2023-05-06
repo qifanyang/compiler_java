@@ -121,6 +121,7 @@ public class Parser {
 
     /**
      * 解析标识符,可能只是一个普通变量,也可能是函数名
+     * 普通变量可能会有初始化操作
      * @return
      */
     ExprAST parseIdentifierExpr(){
@@ -131,7 +132,7 @@ public class Parser {
         //遇到结束符,等于null,直接返回
         Token nextToken = lexer.nextToken();// eat current token
         if(null == nextToken || nextToken.getTokenType() != Symbol.LEFT_PAREN){
-            //是变量标志,检查是否初始化
+            //标识符后面没有{, 所以不是函数调用.是变量标志,检查是否初始化
             if(nextToken.getTokenType() != Symbol.EQ){
                 VariableExprAST identifierExprAST = new VariableExprAST(identifierName, null);
                 curToken = nextToken;
@@ -378,6 +379,9 @@ public class Parser {
     }
 
 
+    /**
+     * 在解析sql语句时,这里可能就不是加减乘除,而是join, from等语句
+     */
     int getTokenPrecedence(){
         // 1 is lowest precedence.
         //Precedence['<'] = 10;
